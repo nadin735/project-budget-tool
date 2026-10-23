@@ -1,54 +1,102 @@
-// Serverless-Proxy zur Anthropic API.
+// Serverless proxy to the Anthropic Messages API.
 //
-// Zweck: Das Frontend (projekt-budget-tool.jsx) ruft außerhalb von Claude-
-// Artifacts diesen Endpunkt unter /api/claude auf statt direkt
-// api.anthropic.com. So bleibt der echte API-Key ausschließlich auf dem
-// Server (als Umgebungsvariable) und wird nie an den Browser ausgeliefert.
+// The browser calls /api/claude; the real key stays in the Vercel environment
+// variable ANTHROPIC_API_KEY and never reaches the client.
 //
-// Setup (Vercel):
-//   1. Dieses Repo (inkl. /api-Ordner) auf GitHub pushen.
-//   2. Auf vercel.com "New Project" -> das GitHub-Repo importieren.
-//   3. In den Vercel-Projekteinstellungen unter "Environment Variables"
-//      eine Variable ANTHROPIC_API_KEY mit deinem Key aus
-//      console.anthropic.com anlegen.
-//   4. Deployen. Vercel erkennt Dateien im /api-Ordner automatisch als
-//      Serverless Functions -- kein weiteres Setup nötig.
-//
-// Setup (Netlify): analog, Datei nach netlify/functions/claude.js
-// verschieben und den Funktionsnamen im Frontend-Endpunkt anpassen.
+// Hardening (the endpoint is public, so it must not be an open relay):
+//   - POST only, same-origin requests only (Origin / Sec-Fetch-Site checked)
+//   - strict request shape: exactly one user message with text and/or one PDF
+//   - model and max_tokens are fixed on the server, not taken from the client
+//   - payload size cap and a best-effort per-IP rate limit
+//   - upstream errors are passed on without internal details
+
+const MODEL = process.env.ANTHROPIC_MODEL || 'claude-sonnet-5-5';
+const MAX_TOKENS = 1000;
+const MAX_TEXT_CHARS = 60000;
+const MAX_PDF_BASE64_CHARS = 4 * 1024 * 1024; // ~3 MB PDF; Vercel caps bodies at 4.5 MB anyway
+const RATE_LIMIT = 10; // requests per IP per minute (per warm instance)
+const hits = new Map();
+
+function fail(res, status, message) {
+  res.status(status).json({ error: { message } });
+}
+
+function sameOrigin(req) {
+  const site = req.headers['sec-fetch-site'];
+  if (site && site !== 'same-origin') return false;
+  const origin = req.headers.origin;
+  if (!origin) return site === 'same-origin';
+  try {
+    return new URL(origin).host === req.headers.host;
+  } catch {
+    return false;
+  }
+}
+
+function rateLimited(ip) {
+  const now = Date.now();
+  const recent = (hits.get(ip) || []).filter((t) => now - t < 60_000);
+  recent.push(now);
+  hits.set(ip, recent);
+  if (hits.size > 5000) hits.clear();
+  return recent.length > RATE_LIMIT;
+}
+
+// Returns a clean content array or null if the shape is not allowed.
+function sanitizeContent(body) {
+  const messages = body && body.messages;
+  if (!Array.isArray(messages) || messages.length !== 1) return null;
+  const msg = messages[0];
+  if (!msg || msg.role !== 'user' || !Array.isArray(msg.content) || msg.content.length < 1 || msg.content.length > 2) return null;
+
+  const content = [];
+  let pdfs = 0;
+  for (const part of msg.content) {
+    if (part && part.type === 'text' && typeof part.text === 'string' && part.text.length <= MAX_TEXT_CHARS) {
+      content.push({ type: 'text', text: part.text });
+    } else if (
+      part && part.type === 'document' && part.source && part.source.type === 'base64' &&
+      part.source.media_type === 'application/pdf' && typeof part.source.data === 'string' &&
+      part.source.data.length <= MAX_PDF_BASE64_CHARS && /^[A-Za-z0-9+/=]+$/.test(part.source.data) && ++pdfs === 1
+    ) {
+      content.push({ type: 'document', source: { type: 'base64', media_type: 'application/pdf', data: part.source.data } });
+    } else {
+      return null;
+    }
+  }
+  return content.some((p) => p.type === 'text') ? content : null;
+}
 
 export default async function handler(req, res) {
-  if (req.method !== 'POST') {
-    res.status(405).json({ error: { message: 'Method not allowed. Use POST.' } });
-    return;
-  }
+  res.setHeader('Cache-Control', 'no-store');
+  if (req.method !== 'POST') return fail(res, 405, 'Method not allowed.');
+  if (!sameOrigin(req)) return fail(res, 403, 'Forbidden.');
+
+  const ip = String(req.headers['x-forwarded-for'] || '').split(',')[0].trim() || 'unknown';
+  if (rateLimited(ip)) return fail(res, 429, 'Zu viele Anfragen – bitte eine Minute warten.');
 
   const apiKey = process.env.ANTHROPIC_API_KEY;
-  if (!apiKey) {
-    res.status(500).json({
-      error: {
-        message: 'ANTHROPIC_API_KEY ist auf dem Server nicht gesetzt. In den Vercel/Netlify-Projekteinstellungen als Umgebungsvariable hinterlegen.',
-      },
-    });
-    return;
-  }
+  if (!apiKey) return fail(res, 503, 'KI-Funktion ist auf diesem Server nicht eingerichtet. Demo-Daten und manuelle Eingabe funktionieren trotzdem.');
+
+  const content = sanitizeContent(req.body);
+  if (!content) return fail(res, 400, 'Ungültige Anfrage.');
 
   try {
     const upstream = await fetch('https://api.anthropic.com/v1/messages', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'x-api-key': apiKey,
-        'anthropic-version': '2023-06-01',
-      },
-      body: JSON.stringify(req.body),
+      headers: { 'Content-Type': 'application/json', 'x-api-key': apiKey, 'anthropic-version': '2023-06-01' },
+      body: JSON.stringify({ model: MODEL, max_tokens: MAX_TOKENS, messages: [{ role: 'user', content }] }),
     });
-
-    const text = await upstream.text();
-    res.status(upstream.status);
-    res.setHeader('Content-Type', 'application/json');
-    res.send(text);
-  } catch (err) {
-    res.status(502).json({ error: { message: `Proxy-Fehler: ${err.message}` } });
+    const data = await upstream.json().catch(() => null);
+    if (!upstream.ok) {
+      const status = upstream.status === 429 || upstream.status === 529 ? upstream.status : 502;
+      return fail(res, status, status === 502 ? 'KI-Dienst nicht erreichbar.' : 'KI-Dienst ausgelastet – bitte später erneut versuchen.');
+    }
+    // Only the parts the frontend reads.
+    res.status(200).json({ content: data?.content ?? [], stop_reason: data?.stop_reason ?? null });
+  } catch {
+    fail(res, 502, 'KI-Dienst nicht erreichbar.');
   }
 }
+
+export const config = { maxDuration: 60 };

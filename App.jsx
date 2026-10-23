@@ -128,14 +128,9 @@ const T = {
     summaryNoIssues: 'Keine Auffälligkeiten.',
     summaryForecastLine: (text) => `Prognose: ${text}`,
     burndownTitle: 'Budget-Burndown',
-    workspaceLabel: 'Konto', newWorkspaceBtn: 'Neues Konto', newWorkspacePlaceholder: 'Name des Kontos, z. B. Firma A',
     createBtn: 'Anlegen', defaultWorkspaceName: 'Mein Konto',
-    workspaceNote: 'Lokale Trennung pro Konto — kein echter Login, nur zur Demonstration.',
     pdfPopupBlocked: 'Der Browser hat das Öffnen des Druckfensters blockiert. Bitte Pop-ups für diese Seite erlauben und erneut versuchen.',
     addMoreOverview: 'Weitere Kostenübersicht (PDF) hinzufügen',
-    gateTitle: 'Konto wählen', gateSub: 'Jedes Konto hat vollständig getrennte Projekte.',
-    gateNote: 'Lokale Trennung — kein echter Login, nur zur Demonstration von Mehrnutzer-Zugängen.',
-    gateContinueBtn: 'Weiter mit diesem Konto', switchAccountBtn: 'Konto wechseln',
     aiForecastBtn: 'Handlungsempfehlung mit Prognose', aiForecastTitle: 'Handlungsempfehlung mit Prognose',
     aiForecastLoading: 'Analysiere Ausgabenverlauf …',
     aiForecastEmptyHint: 'Noch keine Analyse erstellt. Auf "Handlungsempfehlung mit Prognose" klicken, um den Ausgabenverlauf auszuwerten.',
@@ -144,11 +139,10 @@ const T = {
     aiForecastSectionTips: 'Handlungsempfehlungen, um kein Budget zu verlieren',
     aiForecastSectionOutlook: 'Prognose nach Umsetzung der Tipps',
     closeBtn: 'Schließen',
-    passwordLabel: 'Passwort', passwordPlaceholder: 'Passwort eingeben',
-    confirmPasswordLabel: 'Passwort bestätigen', loginBtn: 'Einloggen',
-    wrongPasswordError: 'Falsches Passwort.', passwordMismatchError: 'Passwörter stimmen nicht überein.',
-    passwordTooShortError: 'Mindestens 4 Zeichen.',
-    demoLoginNote: 'Demo-Login: Passwort wird nur lokal geprüft, keine echte Absicherung.',
+    demoBtn: 'Mit Demo-Daten testen – ohne Login', demoHint: 'Lädt 2 fiktive Beispielprojekte. Kein Konto nötig.',
+    localNote: 'Projekte bleiben nur in diesem Browser (localStorage). Nur für PDF-Erkennung und KI-Prognose wird der Inhalt an die Anthropic-API gesendet.',
+    deleteAllData: 'Alle Daten löschen', confirmDeleteAll: 'Alle Projekte und Einstellungen in diesem Browser löschen?',
+    imprint: 'Impressum', privacy: 'Datenschutz', allTools: 'Alle Tools',
   },
   en: {
     appEyebrow: 'Project Budget Tool', portfolioTitle: 'Portfolio Overview',
@@ -209,14 +203,9 @@ const T = {
     summaryNoIssues: 'No issues found.',
     summaryForecastLine: (text) => `Forecast: ${text}`,
     burndownTitle: 'Budget Burndown',
-    workspaceLabel: 'Account', newWorkspaceBtn: 'New account', newWorkspacePlaceholder: 'Account name, e.g. Company A',
     createBtn: 'Create', defaultWorkspaceName: 'My account',
-    workspaceNote: 'Local separation per account — not a real login, for demonstration only.',
     pdfPopupBlocked: 'The browser blocked the print window. Please allow pop-ups for this page and try again.',
     addMoreOverview: 'Add another cost overview (PDF)',
-    gateTitle: 'Choose an account', gateSub: 'Each account has fully separate projects.',
-    gateNote: 'Local separation only — not a real login, for demonstrating multi-user access.',
-    gateContinueBtn: 'Continue with this account', switchAccountBtn: 'Switch account',
     aiForecastBtn: 'Recommendations with forecast', aiForecastTitle: 'Recommendations with forecast',
     aiForecastLoading: 'Analyzing spending history …',
     aiForecastEmptyHint: 'No analysis yet. Click "Recommendations with forecast" to evaluate the spending history.',
@@ -225,11 +214,10 @@ const T = {
     aiForecastSectionTips: 'Recommendations to avoid losing budget',
     aiForecastSectionOutlook: 'Outlook if you follow these tips',
     closeBtn: 'Close',
-    passwordLabel: 'Password', passwordPlaceholder: 'Enter password',
-    confirmPasswordLabel: 'Confirm password', loginBtn: 'Log in',
-    wrongPasswordError: 'Incorrect password.', passwordMismatchError: 'Passwords do not match.',
-    passwordTooShortError: 'At least 4 characters.',
-    demoLoginNote: 'Demo login: password is checked locally only, not a real safeguard.',
+    demoBtn: 'Try with demo data – no login', demoHint: 'Loads 2 fictional sample projects. No account needed.',
+    localNote: 'Projects stay in this browser only (localStorage). Content is sent to the Anthropic API only for PDF detection and the AI forecast.',
+    deleteAllData: 'Delete all data', confirmDeleteAll: 'Delete all projects and settings in this browser?',
+    imprint: 'Imprint', privacy: 'Privacy', allTools: 'All tools',
   },
   ar: {
     appEyebrow: 'أداة ميزانية المشروع', portfolioTitle: 'نظرة عامة على المحفظة',
@@ -290,14 +278,9 @@ const T = {
     summaryNoIssues: 'لا توجد ملاحظات.',
     summaryForecastLine: (text) => `التوقّع: ${text}`,
     burndownTitle: 'مسار الميزانية',
-    workspaceLabel: 'الحساب', newWorkspaceBtn: 'حساب جديد', newWorkspacePlaceholder: 'اسم الحساب، مثال: الشركة أ',
     createBtn: 'إنشاء', defaultWorkspaceName: 'حسابي',
-    workspaceNote: 'فصل محلي لكل حساب — ليس تسجيل دخول حقيقيًا، لأغراض العرض فقط.',
     pdfPopupBlocked: 'قام المتصفح بحظر نافذة الطباعة. يُرجى السماح بالنوافذ المنبثقة لهذه الصفحة والمحاولة مرة أخرى.',
     addMoreOverview: 'إضافة بيانات تكاليف أخرى (PDF)',
-    gateTitle: 'اختر حسابًا', gateSub: 'كل حساب له مشاريع منفصلة تمامًا.',
-    gateNote: 'فصل محلي فقط — ليس تسجيل دخول حقيقيًا، لعرض فكرة تعدد المستخدمين.',
-    gateContinueBtn: 'متابعة بهذا الحساب', switchAccountBtn: 'تبديل الحساب',
     aiForecastBtn: 'توصيات مع توقّع', aiForecastTitle: 'توصيات مع توقّع',
     aiForecastLoading: 'جارٍ تحليل سجل الإنفاق …',
     aiForecastEmptyHint: 'لم يتم إجراء أي تحليل بعد. اضغط على "توصيات مع توقّع" لتحليل سجل الإنفاق.',
@@ -306,11 +289,10 @@ const T = {
     aiForecastSectionTips: 'توصيات لتجنّب خسارة الميزانية',
     aiForecastSectionOutlook: 'التوقّع بعد تطبيق هذه النصائح',
     closeBtn: 'إغلاق',
-    passwordLabel: 'كلمة المرور', passwordPlaceholder: 'أدخل كلمة المرور',
-    confirmPasswordLabel: 'تأكيد كلمة المرور', loginBtn: 'تسجيل الدخول',
-    wrongPasswordError: 'كلمة المرور غير صحيحة.', passwordMismatchError: 'كلمتا المرور غير متطابقتين.',
-    passwordTooShortError: '4 أحرف على الأقل.',
-    demoLoginNote: 'تسجيل دخول تجريبي: يتم التحقق من كلمة المرور محليًا فقط، وليس كإجراء حماية حقيقي.',
+    demoBtn: 'جرّب ببيانات تجريبية – بدون تسجيل دخول', demoHint: 'يحمّل مشروعين تجريبيين خياليين. لا حاجة لحساب.',
+    localNote: 'تبقى المشاريع في هذا المتصفح فقط (localStorage). يُرسل المحتوى إلى واجهة Anthropic فقط لتحليل ملفات PDF والتوقع بالذكاء الاصطناعي.',
+    deleteAllData: 'حذف جميع البيانات', confirmDeleteAll: 'حذف جميع المشاريع والإعدادات في هذا المتصفح؟',
+    imprint: 'بيانات الناشر', privacy: 'الخصوصية', allTools: 'كل الأدوات',
   },
 };
 
@@ -499,7 +481,7 @@ async function callClaudeVisionJSON(base64, prompt, { retries = 4 } = {}) {
           headers: { 'Content-Type': 'application/json' },
           signal: controller.signal,
           body: JSON.stringify({
-            model: 'claude-sonnet-4-6',
+            model: 'claude-sonnet-5-5',
             max_tokens: 1000,
             messages: [
               {
@@ -683,7 +665,7 @@ async function callClaudeTextJSON(prompt, { retries = 4 } = {}) {
           headers: { 'Content-Type': 'application/json' },
           signal: controller.signal,
           body: JSON.stringify({
-            model: 'claude-sonnet-4-6',
+            model: 'claude-sonnet-5-5',
             max_tokens: 1000,
             messages: [{ role: 'user', content: [{ type: 'text', text: prompt }] }],
           }),
@@ -1306,201 +1288,6 @@ function ImportPdfPanel({ projects, onImport, onClose, fixedTarget }) {
 /* Portfolio-Ansicht                                                   */
 /* ------------------------------------------------------------------ */
 
-function AccountGate({ workspaces, loaded, onConfirm, onAddWorkspace, onDeleteWorkspace, lang, setLang }) {
-  const [mode, setMode] = useState(null); // null = still waiting for storage to load
-  const [selected, setSelected] = useState(null);
-  const [name, setName] = useState('');
-  const [password, setPassword] = useState('');
-  const [password2, setPassword2] = useState('');
-  const [error, setError] = useState('');
-  const initializedRef = useRef(false);
-
-  useEffect(() => {
-    if (loaded && !initializedRef.current) {
-      setMode(workspaces.length === 0 ? 'create' : 'list');
-      initializedRef.current = true;
-    }
-  }, [loaded, workspaces.length]);
-
-  // If the last remaining account gets deleted while browsing the list,
-  // drop straight into the create form instead of showing an empty list.
-  useEffect(() => {
-    if (initializedRef.current && workspaces.length === 0 && mode === 'list') {
-      setMode('create');
-    }
-  }, [workspaces.length, mode]);
-
-  function openLogin(w) {
-    setSelected(w);
-    setPassword('');
-    setError('');
-    setMode('login');
-  }
-
-  function submitLogin(e) {
-    e.preventDefault();
-    if (selected.password && selected.password !== password) {
-      setError(t('wrongPasswordError'));
-      return;
-    }
-    onConfirm(selected.id);
-  }
-
-  function submitCreate(e) {
-    e.preventDefault();
-    if (!name.trim()) return;
-    if (password.length < 4) { setError(t('passwordTooShortError')); return; }
-    if (password !== password2) { setError(t('passwordMismatchError')); return; }
-    const id = onAddWorkspace(name.trim(), password);
-    onConfirm(id);
-  }
-
-  return (
-    <div className="gate-screen">
-      <div className="gate-topbar">
-        <LangSwitcher lang={lang} setLang={setLang} />
-      </div>
-      <div className="gate-card">
-        <FileText size={26} />
-        <h1 className="gate-title">{t('gateTitle')}</h1>
-        <p className="gate-sub">{t('gateSub')}</p>
-
-        {mode === null && (
-          <div className="analyzing-block">
-            <Loader2 className="spin" size={18} />
-          </div>
-        )}
-
-        {mode === 'list' && (
-          <div className="gate-account-list">
-            {workspaces.map((w) => (
-              <div className="gate-account-row" key={w.id}>
-                <button className="gate-account-btn" onClick={() => openLogin(w)}>
-                  {w.name}
-                </button>
-                <button
-                  className="gate-account-delete"
-                  title={t('deleteAccountTitle')}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    if (confirm(t('deleteAccountConfirm', w.name))) onDeleteWorkspace(w.id);
-                  }}
-                >
-                  <Trash2 size={14} />
-                </button>
-              </div>
-            ))}
-            <button className="gate-account-btn gate-account-new" onClick={() => { setMode('create'); setName(''); setPassword(''); setPassword2(''); setError(''); }}>
-              <Plus size={14} /> {t('newWorkspaceBtn')}
-            </button>
-          </div>
-        )}
-
-        {mode === 'login' && selected && (
-          <form onSubmit={submitLogin} className="gate-add-form">
-            <p className="gate-login-name">{selected.name}</p>
-            <input
-              autoFocus
-              type="password"
-              placeholder={t('passwordPlaceholder')}
-              value={password}
-              onChange={(e) => { setPassword(e.target.value); setError(''); }}
-            />
-            {error && <p className="gate-error">{error}</p>}
-            <div className="add-actions">
-              <button type="button" className="btn-ghost" onClick={() => setMode('list')}>{t('backBtn')}</button>
-              <button type="submit" className="btn-primary">{t('loginBtn')}</button>
-            </div>
-          </form>
-        )}
-
-        {mode === 'create' && (
-          <form onSubmit={submitCreate} className="gate-add-form">
-            <input
-              autoFocus
-              type="text"
-              placeholder={t('newWorkspacePlaceholder')}
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-            <input
-              type="password"
-              placeholder={t('passwordPlaceholder')}
-              value={password}
-              onChange={(e) => { setPassword(e.target.value); setError(''); }}
-            />
-            <input
-              type="password"
-              placeholder={t('confirmPasswordLabel')}
-              value={password2}
-              onChange={(e) => { setPassword2(e.target.value); setError(''); }}
-            />
-            {error && <p className="gate-error">{error}</p>}
-            <div className="add-actions">
-              {workspaces.length > 0 && (
-                <button type="button" className="btn-ghost" onClick={() => { setMode('list'); setError(''); }}>{t('backBtn')}</button>
-              )}
-              <button type="submit" className="btn-primary">{t('gateContinueBtn')}</button>
-            </div>
-          </form>
-        )}
-
-        
-      </div>
-    </div>
-  );
-}
-
-function WorkspaceSwitcher({ workspaces, activeWorkspace, switchWorkspace, addWorkspace }) {
-  const [adding, setAdding] = useState(false);
-  const [name, setName] = useState('');
-  const [password, setPassword] = useState('');
-
-  function submit(e) {
-    e.preventDefault();
-    if (!name.trim() || password.length < 4) return;
-    addWorkspace(name.trim(), password);
-    setName('');
-    setPassword('');
-    setAdding(false);
-  }
-
-  if (!workspaces || workspaces.length === 0) return null;
-
-  return (
-    <div className="workspace-switcher no-print">
-      {!adding ? (
-        <>
-          <select value={activeWorkspace || ''} onChange={(e) => switchWorkspace(e.target.value)} className="workspace-select">
-            {workspaces.map((w) => <option key={w.id} value={w.id}>{w.name}</option>)}
-          </select>
-          <button className="workspace-add-btn" onClick={() => setAdding(true)} title={t('newWorkspaceBtn')}>
-            <Plus size={13} />
-          </button>
-        </>
-      ) : (
-        <form onSubmit={submit} className="workspace-add-form">
-          <input
-            autoFocus
-            type="text"
-            placeholder={t('newWorkspacePlaceholder')}
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-          />
-          <input
-            type="password"
-            placeholder={t('passwordPlaceholder')}
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-          />
-          <button type="submit" className="btn-primary small">{t('createBtn')}</button>
-          <button type="button" className="icon-btn" onClick={() => { setAdding(false); setName(''); setPassword(''); }}><X size={14} /></button>
-        </form>
-      )}
-    </div>
-  );
-}
-
 function LangSwitcher({ lang, setLang }) {
   const LANGS = [
     { code: 'de', label: 'DE' },
@@ -1522,7 +1309,7 @@ function LangSwitcher({ lang, setLang }) {
   );
 }
 
-function PortfolioView({ projects, onSelect, onAdd, onDelete, onImport, lang, setLang, workspaces, activeWorkspace, switchWorkspace, addWorkspace, onSwitchAccount }) {
+function PortfolioView({ projects, onSelect, onAdd, onDelete, onImport, onLoadDemo, lang, setLang }) {
   const [showImport, setShowImport] = useState(false);
 
   const sorted = useMemo(() => {
@@ -1539,10 +1326,7 @@ function PortfolioView({ projects, onSelect, onAdd, onDelete, onImport, lang, se
   return (
     <div>
       <div className="top-bar no-print">
-        <div className="workspace-group">
-          <WorkspaceSwitcher workspaces={workspaces} activeWorkspace={activeWorkspace} switchWorkspace={switchWorkspace} addWorkspace={addWorkspace} />
-          <button className="switch-account-link" onClick={onSwitchAccount}>{t('switchAccountBtn')}</button>
-        </div>
+        <a className="all-tools-link" href={PORTFOLIO_URL}>← {t('allTools')}</a>
         <LangSwitcher lang={lang} setLang={setLang} />
       </div>
       <div className="ledger-head">
@@ -1572,6 +1356,8 @@ function PortfolioView({ projects, onSelect, onAdd, onDelete, onImport, lang, se
           <button className="btn-primary" onClick={() => setShowImport(true)}>
             <FileText size={15} /> {t('addCostOverview')}
           </button>
+          <button className="btn-ghost" onClick={onLoadDemo}>{t('demoBtn')}</button>
+          <p className="empty-sub demo-hint">{t('demoHint')}</p>
         </div>
       ) : (
         <div className="table-wrap">
@@ -1967,17 +1753,89 @@ function saveJSON(key, value) {
   window.storage?.set(key, JSON.stringify(value)).catch(() => {});
 }
 
+const PORTFOLIO_URL = 'https://nadin.dev';
+
+/* Fictional demo projects, dates relative to today so the status mix stays realistic. */
+function demoProjects() {
+  const iso = (offsetDays) => new Date(TODAY.getTime() + offsetDays * DAY).toISOString().slice(0, 10);
+  const mk = (name, budget, startOff, endOff, areaDefs, rows) => {
+    const areas = areaDefs.map(([n, b]) => ({ id: uid(), name: n, budget: b }));
+    const bookings = rows.map(([areaIdx, amount, dayOff, note]) => ({ id: uid(), areaId: areas[areaIdx].id, amount, date: iso(dayOff), note }));
+    return { id: uid(), name, budget, start: iso(startOff), end: iso(endOff), areas, bookings };
+  };
+  return [
+    mk('Demo: CRM-Einführung (fiktiv)', 120000, -90, 90,
+      [['Personal', 70000], ['Lizenzen', 25000], ['Extern', 20000], ['Sonstiges', 5000]],
+      [[0, 9500, -85, 'Projektleitung Monat 1'], [1, 18000, -80, 'Jahreslizenzen'], [2, 12000, -70, 'Beratung Konzeption'],
+       [0, 11000, -55, 'Projektleitung Monat 2'], [2, 9500, -40, 'Datenmigration extern'], [0, 12500, -25, 'Projektleitung Monat 3'],
+       [3, 1800, -15, 'Schulungsraum'], [0, 9000, -5, 'Key-User-Schulung']]),
+    mk('Demo: Messestand 2026 (fiktiv)', 45000, -30, 30,
+      [['Standbau', 25000], ['Material', 10000], ['Reise', 7000], ['Sonstiges', 3000]],
+      [[0, 14000, -28, 'Anzahlung Standbau'], [1, 4200, -20, 'Druckmaterial'], [2, 2600, -12, 'Hotel'], [0, 9000, -6, 'Restzahlung Standbau'],
+       [1, 3100, -3, 'Give-aways']]),
+  ];
+}
+
+/* Impressum (§ 18 Abs. 1 MStV) and privacy notice — German on purpose. */
+const OWNER = {
+  name: 'Nadin Okil',
+  street: '[Straße und Hausnummer]', // TODO: ladungsfähige Anschrift (Pflicht nach § 18 MStV)
+  city: '[PLZ Ort]',
+  email: 'nadinokil.contact@gmail.com',
+};
+
+function LegalModal({ page, onClose }) {
+  useEffect(() => {
+    const onKey = (e) => { if (e.key === 'Escape') onClose(); };
+    window.addEventListener('keydown', onKey);
+    return () => window.removeEventListener('keydown', onKey);
+  }, [onClose]);
+  return (
+    <div className="modal-backdrop" onClick={onClose}>
+      <div className="modal-panel legal-text" role="dialog" aria-modal="true" lang="de" dir="ltr" onClick={(e) => e.stopPropagation()}>
+        <div className="modal-head">
+          <h2>{page === 'imprint' ? 'Impressum' : 'Datenschutzerklärung'}</h2>
+          <button className="icon-btn" onClick={onClose} aria-label="Schließen" autoFocus><X size={16} /></button>
+        </div>
+        {page === 'imprint' ? (
+          <>
+            <p>Angaben gemäß § 18 Abs. 1 MStV</p>
+            <p>{OWNER.name}<br />{OWNER.street}<br />{OWNER.city}</p>
+            <p>E-Mail: <a href={`mailto:${OWNER.email}`}>{OWNER.email}</a></p>
+            <p>Projekt-Budget-Tool ist ein privates, nicht-kommerzielles Portfolio-Projekt ohne Werbung, Einnahmen oder Konten.</p>
+          </>
+        ) : (
+          <>
+            <h3>Verantwortlich</h3>
+            <p>{OWNER.name}, {OWNER.street}, {OWNER.city}, {OWNER.email}</p>
+            <h3>Hosting</h3>
+            <p>Die Seite wird von Vercel Inc. (340 S Lemon Ave #4133, Walnut, CA 91789, USA) ausgeliefert. Beim Aufruf verarbeitet Vercel technisch notwendige Daten (IP-Adresse, Zeitpunkt, angeforderte Datei, Browser-Kennung) in Server-Logs, um die Seite sicher auszuliefern. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Für Übermittlungen in die USA stützt sich Vercel auf das EU-US Data Privacy Framework und Standardvertragsklauseln.</p>
+            <h3>Ihre Eingaben</h3>
+            <p>Es gibt kein Login und keine Datenbank. Projekte und Buchungen werden ausschließlich im localStorage Ihres Browsers gespeichert. Mit „Alle Daten löschen“ unten auf der Seite entfernen Sie alles sofort.</p>
+            <h3>KI-Funktionen (optional)</h3>
+            <p>Nur wenn Sie eine PDF zur automatischen Erkennung hochladen oder eine KI-Prognose anfordern, wird der Inhalt (PDF bzw. Projektzahlen) über diese Seite an die API von Anthropic PBC (548 Market St, San Francisco, CA 94104, USA) gesendet und dort ausgewertet. Ich speichere diese Inhalte nicht. Rechtsgrundlage ist Ihre Handlung (Art. 6 Abs. 1 lit. a DSGVO). Bitte laden Sie keine Dokumente mit personenbezogenen oder vertraulichen Daten hoch – nutzen Sie dafür die Demo-Daten oder die manuelle Eingabe.</p>
+            <h3>Keine Cookies, kein Tracking</h3>
+            <p>Es werden keine Cookies gesetzt, keine Analyse-Dienste eingesetzt und keine externen Schriften oder Skripte geladen.</p>
+            <h3>Ihre Rechte</h3>
+            <p>Auskunft, Berichtigung, Löschung, Einschränkung, Widerspruch und Datenübertragbarkeit (Art. 15–21 DSGVO) sowie Beschwerde bei einer Aufsichtsbehörde (Art. 77 DSGVO).</p>
+          </>
+        )}
+      </div>
+    </div>
+  );
+}
+
 function App() {
-  const [workspaces, setWorkspaces] = useState(null); // null = not loaded yet
+  // No login: one local workspace per browser. Older versions stored named
+  // "accounts" with plain-text passwords; those passwords are stripped on load.
   const [activeWorkspace, setActiveWorkspace] = useState(null);
-  const [accountConfirmed, setAccountConfirmed] = useState(false);
   const [workspacesLoaded, setWorkspacesLoaded] = useState(false);
+  const [legalPage, setLegalPage] = useState(null);
   const [projects, setProjects] = useState([]);
   const [selectedId, setSelectedId] = useState(null);
   const [lang, setLang] = useState('de');
   const loadedRef = useRef(false);
   const langLoadedRef = useRef(false);
-  const workspacesLoadedRef = useRef(false);
   const projectsLoadedForRef = useRef(null); // which workspace id the current `projects` state belongs to
 
   // Load language + workspace list (+ migrate legacy single-workspace data) once on mount.
@@ -1993,35 +1851,27 @@ function App() {
     (async () => {
       let list = await loadJSON('workspaces', 4000);
       let active = await loadJSON('activeWorkspace', 2000);
-      const wasConfirmed = await loadJSON('accountConfirmed', 2000);
 
       if (!Array.isArray(list)) list = [];
 
       if (list.length === 0) {
-        // First run: only auto-create a workspace if there's legacy (pre-account-system) data
-        // to migrate. Otherwise leave the list empty — the login gate handles first signup.
+        // First run: migrate legacy single-workspace data if present.
         const legacyProjects = await loadJSON('projects', 3000);
-        if (Array.isArray(legacyProjects) && legacyProjects.length > 0) {
-          const id = uid();
-          list = [{ id, name: t('defaultWorkspaceName'), password: '' }];
-          active = id;
-          saveJSON('workspaces', list);
-          saveJSON('activeWorkspace', active);
-          saveJSON(`projects:${id}`, legacyProjects);
-        }
+        const id = uid();
+        list = [{ id, name: t('defaultWorkspaceName') }];
+        active = id;
+        saveJSON(`projects:${id}`, Array.isArray(legacyProjects) ? legacyProjects : []);
       }
-      if (list.length > 0 && (!active || !list.find((w) => w.id === active))) active = list[0].id;
+      if (!active || !list.find((w) => w.id === active)) active = list[0].id;
+      // Remove stored passwords and the old "logged in" flag for good.
+      saveJSON('workspaces', list.map(({ id, name }) => ({ id, name })));
+      saveJSON('activeWorkspace', active);
+      window.storage?.delete('accountConfirmed').catch(() => {});
 
       if (!cancelled) {
-        setWorkspaces(list);
-        setActiveWorkspace(active || null);
-        // Stay logged in across visits: only auto-confirm if we previously
-        // logged in successfully AND that account still exists.
-        if (wasConfirmed === true && active && list.find((w) => w.id === active)) {
-          setAccountConfirmed(true);
-        }
+        setActiveWorkspace(active);
+        setWorkspacesLoaded(true);
       }
-      if (!cancelled) { workspacesLoadedRef.current = true; setWorkspacesLoaded(true); }
     })();
 
     return () => { cancelled = true; };
@@ -2060,42 +1910,17 @@ function App() {
   // through every function signature.
   CURRENT_LANG = lang;
 
-  function addWorkspace(name, password) {
-    const id = uid();
-    const list = [...(workspaces || []), { id, name, password: password || '' }];
-    setWorkspaces(list);
-    saveJSON('workspaces', list);
-    saveJSON(`projects:${id}`, []);
-    setActiveWorkspace(id);
-    saveJSON('activeWorkspace', id);
-    return id;
+  function loadDemo() {
+    setProjects([...projects, ...demoProjects()]);
   }
-  function switchWorkspace(id) {
-    setActiveWorkspace(id);
-    saveJSON('activeWorkspace', id);
-  }
-  function deleteWorkspace(id) {
-    const list = (workspaces || []).filter((w) => w.id !== id);
-    setWorkspaces(list);
-    saveJSON('workspaces', list);
-    window.storage?.delete(`projects:${id}`).catch(() => {});
-    if (activeWorkspace === id) {
-      const nextActive = list.length > 0 ? list[0].id : null;
-      setActiveWorkspace(nextActive);
-      if (nextActive) saveJSON('activeWorkspace', nextActive);
-      else window.storage?.delete('activeWorkspace').catch(() => {});
-      setAccountConfirmed(false);
-      saveJSON('accountConfirmed', false);
-    }
-  }
-  function confirmAccount(id) {
-    switchWorkspace(id);
-    setAccountConfirmed(true);
-    saveJSON('accountConfirmed', true);
-  }
-  function openAccountGate() {
-    setAccountConfirmed(false);
-    saveJSON('accountConfirmed', false);
+  async function deleteAllData() {
+    if (!window.confirm(t('confirmDeleteAll'))) return;
+    try {
+      Object.keys(window.localStorage)
+        .filter((k) => k.startsWith('projekt-budget-tool:'))
+        .forEach((k) => window.localStorage.removeItem(k));
+    } catch { /* storage unavailable */ }
+    window.location.reload();
   }
 
   const selected = projects.find((p) => p.id === selectedId) || null;
@@ -2121,8 +1946,6 @@ function App() {
   return (
     <div className="app-root" dir={lang === 'ar' ? 'rtl' : 'ltr'}>
       <style>{`
-        @import url('https://fonts.googleapis.com/css2?family=Spectral:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap');
-
         [dir="rtl"] { font-family: 'Noto Sans Arabic', 'IBM Plex Sans', sans-serif; }
         [dir="rtl"] h1, [dir="rtl"] h2 { font-family: 'Noto Sans Arabic', 'Spectral', serif; }
 
@@ -2297,39 +2120,18 @@ function App() {
         .detail-toolbar .back-link { margin: 0; }
 
         .top-bar { max-width: 980px; margin: 0 auto 14px; display: flex; justify-content: space-between; align-items: center; gap: 10px; flex-wrap: wrap; }
-        .workspace-group { display: flex; align-items: center; gap: 10px; }
-        .workspace-switcher { display: flex; align-items: center; gap: 6px; }
-        .switch-account-link { background: none; border: none; color: #5A6890; font-size: 11px; text-decoration: underline; cursor: pointer; padding: 0; }
-        .switch-account-link:hover { color: #93A0C2; }
 
-        .credit-footer { max-width: 980px; margin: 32px auto 0; text-align: center; font-size: 11px; color: #3A4A70; }
-
-        .gate-screen { min-height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 24px; }
-        .gate-topbar { position: absolute; top: 24px; inset-inline-end: 24px; }
-        .gate-card { max-width: 420px; width: 100%; text-align: center; display: flex; flex-direction: column; align-items: center; gap: 6px; }
-        .gate-card svg { color: #C9A227; margin-bottom: 6px; }
-        .gate-title { margin: 0; }
-        .gate-sub { font-size: 13px; color: #93A0C2; margin: 0 0 20px; line-height: 1.6; }
-        .gate-account-list { display: flex; flex-direction: column; gap: 8px; width: 100%; }
-        .gate-account-row { display: flex; align-items: stretch; gap: 6px; }
-        .gate-account-row .gate-account-btn { flex: 1; }
-        .gate-account-delete { background: none; border: 1px solid #263758; color: #5A6890; border-radius: 6px; padding: 0 12px; cursor: pointer; display: flex; align-items: center; justify-content: center; }
-        .gate-account-delete:hover { border-color: #E2574C; color: #E2574C; }
-        .gate-account-btn { background: #101A30; border: 1px solid #263758; color: #EEF1F8; font-family: 'Spectral', serif; font-size: 15px; font-weight: 600; padding: 14px 18px; border-radius: 6px; cursor: pointer; text-align: center; }
-        .gate-account-btn:hover { border-color: #C9A227; background: #16213A; }
-        .gate-account-new { display: flex; align-items: center; justify-content: center; gap: 6px; background: none; border: 1px dashed #3A4A70; color: #93A0C2; font-family: 'IBM Plex Sans', sans-serif; font-weight: 500; font-size: 13px; }
-        .gate-account-new:hover { border-color: #C9A227; color: #E9C862; }
-        .gate-add-form { display: flex; flex-direction: column; gap: 12px; width: 100%; }
-        .gate-add-form input { text-align: center; }
-        .gate-login-name { font-family: 'Spectral', serif; font-size: 17px; font-weight: 600; color: #F5F0E0; margin: 0 0 6px; }
-        .gate-error { color: #E2574C; font-size: 12px; margin: -4px 0 0; }
-        .gate-add-form .add-actions { justify-content: center; margin-top: 0; }
-        .gate-note { font-size: 11px; color: #5A6890; margin: 22px 0 0; line-height: 1.6; }
-        .workspace-select { font-size: 12px; padding: 5px 8px; }
-        .workspace-add-btn { background: none; border: 1px dashed #3A4A70; color: #93A0C2; border-radius: 4px; padding: 5px 7px; cursor: pointer; display: flex; }
-        .workspace-add-btn:hover { border-color: #C9A227; color: #E9C862; }
-        .workspace-add-form { display: flex; align-items: center; gap: 6px; }
-        .workspace-add-form input { font-size: 12px; padding: 5px 8px; width: 180px; }
+        .credit-footer { max-width: 980px; margin: 40px auto 0; text-align: center; font-size: 12px; color: #93A0C2; display: flex; flex-direction: column; gap: 10px; align-items: center; }
+        .credit-footer p { margin: 0; max-width: 620px; line-height: 1.5; }
+        .legal-links { display: flex; flex-wrap: wrap; gap: 6px 18px; justify-content: center; }
+        .legal-links button, .legal-links a { background: none; border: none; padding: 0; color: #C7CEE0; font-size: 12px; text-decoration: underline; cursor: pointer; }
+        .legal-links button:hover, .legal-links a:hover, .all-tools-link:hover { color: #E9C862; }
+        .all-tools-link { color: #C7CEE0; font-size: 13px; text-decoration: underline; }
+        .demo-hint { font-size: 12px; margin-top: -2px; }
+        .legal-text { font-size: 14px; line-height: 1.6; color: #DDE3F0; }
+        .legal-text h3 { font-size: 14px; margin: 16px 0 4px; color: #F5F0E0; }
+        .legal-text p { margin: 0 0 8px; }
+        .legal-text a { color: #E9C862; }
 
         .lang-switcher { margin: 0; display: flex; gap: 6px; }
         .lang-btn { background: none; border: 1px solid #2C3B5C; color: #93A0C2; padding: 5px 12px; border-radius: 4px; font-size: 12px; font-family: 'IBM Plex Mono', monospace; cursor: pointer; }
@@ -2372,17 +2174,7 @@ function App() {
         }
       `}</style>
 
-      {!accountConfirmed ? (
-        <AccountGate
-          workspaces={workspaces || []}
-          loaded={workspacesLoaded}
-          onConfirm={confirmAccount}
-          onAddWorkspace={addWorkspace}
-          onDeleteWorkspace={deleteWorkspace}
-          lang={lang}
-          setLang={setLang}
-        />
-      ) : selected ? (
+      {!workspacesLoaded ? null : selected ? (
         <DetailView
           project={selected}
           onBack={() => setSelectedId(null)}
@@ -2403,14 +2195,20 @@ function App() {
           onImport={handleImport}
           lang={lang}
           setLang={setLang}
-          workspaces={workspaces || []}
-          activeWorkspace={activeWorkspace}
-          switchWorkspace={switchWorkspace}
-          addWorkspace={addWorkspace}
-          onSwitchAccount={openAccountGate}
+          onLoadDemo={loadDemo}
         />
       )}
-      <p className="credit-footer no-print">made by Nadin Okil</p>
+      <footer className="credit-footer no-print">
+        <p>{t('localNote')}</p>
+        <nav className="legal-links">
+          <button onClick={() => setLegalPage('imprint')}>{t('imprint')}</button>
+          <button onClick={() => setLegalPage('privacy')}>{t('privacy')}</button>
+          <button onClick={deleteAllData}>{t('deleteAllData')}</button>
+          <a href={PORTFOLIO_URL}>{t('allTools')}</a>
+        </nav>
+        <p>made by Nadin Okil</p>
+      </footer>
+      {legalPage && <LegalModal page={legalPage} onClose={() => setLegalPage(null)} />}
     </div>
   );
 }
