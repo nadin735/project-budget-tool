@@ -7,10 +7,10 @@ import { Plus, ArrowLeft, AlertTriangle, TrendingUp, Copy, Check, Trash2, Chevro
 
 /* ------------------------------------------------------------------ */
 /* Storage-Bridge: außerhalb von Claude-Artifacts (window.storage      */
-/* existiert dann nicht) automatisch auf localStorage zurückfallen.    */
+/* existiert dann nicht) automatisch auf sessionStorage zurückfallen.   */
 /* Dieser Block ist bewusst der einzige Ort, den ein GitHub-Export     */
 /* eventuell anpassen muss (z. B. um stattdessen einen eigenen Server  */
-/* mit echten Nutzerkonten anzusprechen statt localStorage).           */
+/* mit echten Nutzerkonten anzusprechen statt sessionStorage).         */
 /* ------------------------------------------------------------------ */
 // Detected BEFORE the storage polyfill below runs, so it reflects reality:
 // true only when Claude's artifact environment already provided window.storage.
@@ -26,23 +26,31 @@ const CLAUDE_API_ENDPOINT = RUNNING_IN_CLAUDE
   : '/api/claude';
 
 if (typeof window !== 'undefined' && !window.storage) {
+  // Per-visitor data: sessionStorage lives only in this browser tab and is
+  // cleared when the tab closes, so the next person always starts empty.
+  // Earlier versions used localStorage (incl. plain-text demo passwords);
+  // those keys are wiped here once.
   const LS_PREFIX = 'projekt-budget-tool:';
+  try {
+    Object.keys(window.localStorage).filter((k) => k.startsWith(LS_PREFIX)).forEach((k) => window.localStorage.removeItem(k));
+  } catch { /* storage unavailable */ }
+  const store = window.sessionStorage;
   window.storage = {
     async get(key) {
-      const raw = window.localStorage.getItem(LS_PREFIX + key);
+      const raw = store.getItem(LS_PREFIX + key);
       if (raw === null) throw new Error(`Key not found: ${key}`);
       return { key, value: raw };
     },
     async set(key, value) {
-      window.localStorage.setItem(LS_PREFIX + key, value);
+      store.setItem(LS_PREFIX + key, value);
       return { key, value };
     },
     async delete(key) {
-      window.localStorage.removeItem(LS_PREFIX + key);
+      store.removeItem(LS_PREFIX + key);
       return { key, deleted: true };
     },
     async list(prefix) {
-      const keys = Object.keys(window.localStorage)
+      const keys = Object.keys(store)
         .filter((k) => k.startsWith(LS_PREFIX))
         .map((k) => k.slice(LS_PREFIX.length))
         .filter((k) => !prefix || k.startsWith(prefix));
@@ -140,9 +148,9 @@ const T = {
     aiForecastSectionOutlook: 'Prognose nach Umsetzung der Tipps',
     closeBtn: 'Schließen',
     demoBtn: 'Mit Demo-Daten testen – ohne Login', demoHint: 'Lädt 2 fiktive Beispielprojekte. Kein Konto nötig.',
-    localNote: 'Projekte bleiben nur in diesem Browser (localStorage). Nur für PDF-Erkennung und KI-Prognose wird der Inhalt an die Anthropic-API gesendet.',
+    localNote: 'Ihre Daten bleiben nur in diesem Browser-Tab und werden beim Schließen automatisch gelöscht; jede Person startet leer. Nur für PDF-Erkennung und KI-Prognose wird der Inhalt an die Anthropic-API gesendet.',
     deleteAllData: 'Alle Daten löschen', confirmDeleteAll: 'Alle Projekte und Einstellungen in diesem Browser löschen?',
-    imprint: 'Impressum', privacy: 'Datenschutz', allTools: 'Alle Tools',
+    imprint: 'Impressum', privacy: 'Datenschutz', allTools: 'Zurück zur Startseite',
   },
   en: {
     appEyebrow: 'Project Budget Tool', portfolioTitle: 'Portfolio Overview',
@@ -215,9 +223,9 @@ const T = {
     aiForecastSectionOutlook: 'Outlook if you follow these tips',
     closeBtn: 'Close',
     demoBtn: 'Try with demo data – no login', demoHint: 'Loads 2 fictional sample projects. No account needed.',
-    localNote: 'Projects stay in this browser only (localStorage). Content is sent to the Anthropic API only for PDF detection and the AI forecast.',
+    localNote: 'Your data stays in this browser tab only and is deleted when you close it; everyone starts empty. Content is sent to the Anthropic API only for PDF detection and the AI forecast.',
     deleteAllData: 'Delete all data', confirmDeleteAll: 'Delete all projects and settings in this browser?',
-    imprint: 'Imprint', privacy: 'Privacy', allTools: 'All tools',
+    imprint: 'Imprint', privacy: 'Privacy', allTools: 'Back to home',
   },
   ar: {
     appEyebrow: 'أداة ميزانية المشروع', portfolioTitle: 'نظرة عامة على المحفظة',
@@ -290,9 +298,9 @@ const T = {
     aiForecastSectionOutlook: 'التوقّع بعد تطبيق هذه النصائح',
     closeBtn: 'إغلاق',
     demoBtn: 'جرّب ببيانات تجريبية – بدون تسجيل دخول', demoHint: 'يحمّل مشروعين تجريبيين خياليين. لا حاجة لحساب.',
-    localNote: 'تبقى المشاريع في هذا المتصفح فقط (localStorage). يُرسل المحتوى إلى واجهة Anthropic فقط لتحليل ملفات PDF والتوقع بالذكاء الاصطناعي.',
+    localNote: 'تبقى بياناتك في علامة التبويب هذه فقط وتُحذف عند إغلاقها، ويبدأ كل شخص بصفحة فارغة. يُرسل المحتوى إلى واجهة Anthropic فقط لتحليل ملفات PDF والتوقع بالذكاء الاصطناعي.',
     deleteAllData: 'حذف جميع البيانات', confirmDeleteAll: 'حذف جميع المشاريع والإعدادات في هذا المتصفح؟',
-    imprint: 'بيانات الناشر', privacy: 'الخصوصية', allTools: 'كل الأدوات',
+    imprint: 'بيانات الناشر', privacy: 'الخصوصية', allTools: 'العودة إلى الصفحة الرئيسية',
   },
 };
 
@@ -1753,7 +1761,7 @@ function saveJSON(key, value) {
   window.storage?.set(key, JSON.stringify(value)).catch(() => {});
 }
 
-const PORTFOLIO_URL = 'https://nadin.dev';
+const PORTFOLIO_URL = 'https://projektmanagement.nadin.dev';
 
 /* Fictional demo projects, dates relative to today so the status mix stays realistic. */
 function demoProjects() {
@@ -1811,7 +1819,7 @@ function LegalModal({ page, onClose }) {
             <h3>Hosting</h3>
             <p>Die Seite wird von Vercel Inc. (340 S Lemon Ave #4133, Walnut, CA 91789, USA) ausgeliefert. Beim Aufruf verarbeitet Vercel technisch notwendige Daten (IP-Adresse, Zeitpunkt, angeforderte Datei, Browser-Kennung) in Server-Logs, um die Seite sicher auszuliefern. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Für Übermittlungen in die USA stützt sich Vercel auf das EU-US Data Privacy Framework und Standardvertragsklauseln.</p>
             <h3>Ihre Eingaben</h3>
-            <p>Es gibt kein Login und keine Datenbank. Projekte und Buchungen werden ausschließlich im localStorage Ihres Browsers gespeichert. Mit „Alle Daten löschen“ unten auf der Seite entfernen Sie alles sofort.</p>
+            <p>Es gibt kein Login und keine Datenbank. Projekte und Buchungen werden nur im sessionStorage dieses Browser-Tabs gespeichert und beim Schließen des Tabs automatisch gelöscht; jede Person, die den Link öffnet, startet mit einer leeren Seite. Mit „Alle Daten löschen“ unten auf der Seite entfernen Sie alles sofort.</p>
             <h3>KI-Funktionen (optional)</h3>
             <p>Nur wenn Sie eine PDF zur automatischen Erkennung hochladen oder eine KI-Prognose anfordern, wird der Inhalt (PDF bzw. Projektzahlen) über diese Seite an die API von Anthropic PBC (548 Market St, San Francisco, CA 94104, USA) gesendet und dort ausgewertet. Ich speichere diese Inhalte nicht. Rechtsgrundlage ist Ihre Handlung (Art. 6 Abs. 1 lit. a DSGVO). Bitte laden Sie keine Dokumente mit personenbezogenen oder vertraulichen Daten hoch – nutzen Sie dafür die Demo-Daten oder die manuelle Eingabe.</p>
             <h3>Keine Cookies, kein Tracking</h3>
@@ -1916,9 +1924,9 @@ function App() {
   async function deleteAllData() {
     if (!window.confirm(t('confirmDeleteAll'))) return;
     try {
-      Object.keys(window.localStorage)
+      Object.keys(window.sessionStorage)
         .filter((k) => k.startsWith('projekt-budget-tool:'))
-        .forEach((k) => window.localStorage.removeItem(k));
+        .forEach((k) => window.sessionStorage.removeItem(k));
     } catch { /* storage unavailable */ }
     window.location.reload();
   }
