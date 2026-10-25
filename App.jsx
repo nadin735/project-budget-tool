@@ -147,7 +147,7 @@ const T = {
     aiForecastSectionTips: 'Handlungsempfehlungen, um kein Budget zu verlieren',
     aiForecastSectionOutlook: 'Prognose nach Umsetzung der Tipps',
     closeBtn: 'Schließen',
-    demoBtn: 'Mit Demo-Daten testen – ohne Login', demoHint: 'Lädt 2 fiktive Beispielprojekte. Kein Konto nötig.',
+    demoBtn: 'Mit Demo-Daten testen – ohne Login', demoHint: 'Lädt 2 fiktive Beispielprojekte. Kein Konto nötig.', purposeLine: "Für Projektleitung: Kostenübersicht als PDF hochladen oder eintragen. Verbrauch, Restbudget und Prognose bis Projektende erscheinen direkt im Browser, ohne Konto.", previewTitle: "So sieht ein Ergebnis aus (Demo mit fiktiven Daten)", previewAlt: "Beispielergebnis: Budget, Verbrauch, Rest, Zeitfortschritt und Warnhinweis",
     localNote: 'Ihre Daten bleiben nur in diesem Browser-Tab und werden beim Schließen automatisch gelöscht; jede Person startet leer. Nur für PDF-Erkennung und KI-Prognose wird der Inhalt an die Anthropic-API gesendet.',
     deleteAllData: 'Alle Daten löschen', confirmDeleteAll: 'Alle Projekte und Einstellungen in diesem Browser löschen?',
     imprint: 'Impressum', privacy: 'Datenschutz', allTools: 'Zurück zur Startseite',
@@ -222,7 +222,7 @@ const T = {
     aiForecastSectionTips: 'Recommendations to avoid losing budget',
     aiForecastSectionOutlook: 'Outlook if you follow these tips',
     closeBtn: 'Close',
-    demoBtn: 'Try with demo data – no login', demoHint: 'Loads 2 fictional sample projects. No account needed.',
+    demoBtn: 'Try with demo data – no login', demoHint: 'Loads 2 fictional sample projects. No account needed.', purposeLine: "For project managers: upload a cost overview as PDF or enter it. Spend, remaining budget and a forecast to project end appear right in the browser, no account needed.", previewTitle: "What a result looks like (demo with fictional data)", previewAlt: "Example result: budget, spend, remainder, time progress and warning",
     localNote: 'Your data stays in this browser tab only and is deleted when you close it; everyone starts empty. Content is sent to the Anthropic API only for PDF detection and the AI forecast.',
     deleteAllData: 'Delete all data', confirmDeleteAll: 'Delete all projects and settings in this browser?',
     imprint: 'Imprint', privacy: 'Privacy', allTools: 'Back to home',
@@ -297,7 +297,7 @@ const T = {
     aiForecastSectionTips: 'توصيات لتجنّب خسارة الميزانية',
     aiForecastSectionOutlook: 'التوقّع بعد تطبيق هذه النصائح',
     closeBtn: 'إغلاق',
-    demoBtn: 'جرّب ببيانات تجريبية – بدون تسجيل دخول', demoHint: 'يحمّل مشروعين تجريبيين خياليين. لا حاجة لحساب.',
+    demoBtn: 'جرّب ببيانات تجريبية – بدون تسجيل دخول', demoHint: 'يحمّل مشروعين تجريبيين خياليين. لا حاجة لحساب.', purposeLine: "لمديري المشاريع: ارفع كشف التكاليف بصيغة PDF أو أدخله. يظهر الإنفاق والميزانية المتبقية والتوقع حتى نهاية المشروع مباشرة في المتصفح دون حساب.", previewTitle: "هكذا تبدو النتيجة (عرض تجريبي ببيانات خيالية)", previewAlt: "نتيجة مثال: الميزانية والإنفاق والمتبقي وتقدم الوقت وتنبيه",
     localNote: 'تبقى بياناتك في علامة التبويب هذه فقط وتُحذف عند إغلاقها، ويبدأ كل شخص بصفحة فارغة. يُرسل المحتوى إلى واجهة Anthropic فقط لتحليل ملفات PDF والتوقع بالذكاء الاصطناعي.',
     deleteAllData: 'حذف جميع البيانات', confirmDeleteAll: 'حذف جميع المشاريع والإعدادات في هذا المتصفح؟',
     imprint: 'بيانات الناشر', privacy: 'الخصوصية', allTools: 'العودة إلى الصفحة الرئيسية',
@@ -1360,12 +1360,17 @@ function PortfolioView({ projects, onSelect, onAdd, onDelete, onImport, onLoadDe
         <div className="empty-state">
           <FileText size={28} />
           <h2 className="empty-title">{t('emptyTitle')}</h2>
+          <p className="empty-sub">{t('purposeLine')}</p>
           <p className="empty-sub">{t('emptySub')}</p>
           <button className="btn-primary" onClick={() => setShowImport(true)}>
             <FileText size={15} /> {t('addCostOverview')}
           </button>
           <button className="btn-ghost" onClick={onLoadDemo}>{t('demoBtn')}</button>
           <p className="empty-sub demo-hint">{t('demoHint')}</p>
+          <figure className="empty-preview">
+            <figcaption>{t('previewTitle')}</figcaption>
+            <img src="/preview.webp" alt={t('previewAlt')} width={1200} height={500} loading="lazy" />
+          </figure>
         </div>
       ) : (
         <div className="table-wrap">
@@ -2087,8 +2092,9 @@ function App() {
         .add-btn-row { max-width: 980px; margin: 16px auto 0; display: flex; gap: 10px; }
         .add-btn-row .btn-add { margin: 0; }
 
-        .empty-state { max-width: 480px; margin: 60px auto; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px; color: #93A0C2; }
+        .empty-state { max-width: 760px; margin: 60px auto; display: flex; flex-direction: column; align-items: center; text-align: center; gap: 10px; color: #93A0C2; }
         .empty-state svg { color: #C9A227; margin-bottom: 4px; }
+        .empty-state .empty-sub { max-width: 480px; }
         .empty-title { margin: 0; color: #F5F0E0; }
         .empty-sub { font-size: 13px; line-height: 1.6; margin: 0 0 8px; }
         .empty-state .btn-primary { display: inline-flex; align-items: center; gap: 7px; }
@@ -2136,6 +2142,9 @@ function App() {
         .legal-links button:hover, .legal-links a:hover, .all-tools-link:hover { color: #E9C862; }
         .all-tools-link { color: #C7CEE0; font-size: 13px; text-decoration: underline; }
         .demo-hint { font-size: 12px; margin-top: -2px; }
+        .empty-preview { margin: 32px auto 0; width: 100%; max-width: 760px; text-align: left; }
+        .empty-preview figcaption { font-size: 12px; opacity: .7; margin-bottom: 8px; }
+        .empty-preview img { width: 100%; height: auto; border-radius: 8px; border: 1px solid rgba(255,255,255,.12); display: block; }
         .legal-text { font-size: 14px; line-height: 1.6; color: #DDE3F0; }
         .legal-text h3 { font-size: 14px; margin: 16px 0 4px; color: #F5F0E0; }
         .legal-text p { margin: 0 0 8px; }
