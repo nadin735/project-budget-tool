@@ -1792,8 +1792,6 @@ function demoProjects() {
 /* Impressum (§ 18 Abs. 1 MStV) and privacy notice — German on purpose. */
 const OWNER = {
   name: 'Nadin Okil',
-  street: '[Straße und Hausnummer]', // TODO: ladungsfähige Anschrift (Pflicht nach § 18 MStV)
-  city: '[PLZ Ort]',
   email: 'nadinokil.contact@gmail.com',
 };
 
@@ -1813,14 +1811,14 @@ function LegalModal({ page, onClose }) {
         {page === 'imprint' ? (
           <>
             <p>Angaben gemäß § 18 Abs. 1 MStV</p>
-            <p>{OWNER.name}<br />{OWNER.street}<br />{OWNER.city}</p>
+            <p>{OWNER.name}</p>
             <p>E-Mail: <a href={`mailto:${OWNER.email}`}>{OWNER.email}</a></p>
             <p>Projekt-Budget-Tool ist ein privates, nicht-kommerzielles Portfolio-Projekt ohne Werbung, Einnahmen oder Konten.</p>
           </>
         ) : (
           <>
             <h3>Verantwortlich</h3>
-            <p>{OWNER.name}, {OWNER.street}, {OWNER.city}, {OWNER.email}</p>
+            <p>{OWNER.name}, {OWNER.email}</p>
             <h3>Hosting</h3>
             <p>Die Seite wird von Vercel Inc. (340 S Lemon Ave #4133, Walnut, CA 91789, USA) ausgeliefert. Beim Aufruf verarbeitet Vercel technisch notwendige Daten (IP-Adresse, Zeitpunkt, angeforderte Datei, Browser-Kennung) in Server-Logs, um die Seite sicher auszuliefern. Rechtsgrundlage ist Art. 6 Abs. 1 lit. f DSGVO. Für Übermittlungen in die USA stützt sich Vercel auf das EU-US Data Privacy Framework und Standardvertragsklauseln.</p>
             <h3>Ihre Eingaben</h3>
